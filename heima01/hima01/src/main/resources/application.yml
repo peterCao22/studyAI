@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: HiMa01
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        base-url: https://vip.apiyi.com
+        options:
+          model: gpt-4o-mini
+    grok:
+      api-key: ${GROK_API_KEY}
+      base-url: https://api.x.ai
+      options:
+        model: grok-3-mini-beta
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/itheima?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: wm@654321
+
+
+logging:
+  level:
+    org.springframework.ai: debug
+    com.marcopolo.hima01: debug

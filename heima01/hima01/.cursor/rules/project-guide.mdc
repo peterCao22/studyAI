@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 智能聊天应用项目指南
+
+## 项目概述
+这是一个基于Spring Boot和Spring AI构建的聊天机器人应用，使用OpenAI API实现AI聊天功能。
+
+## 主要组件
+
+### 应用入口
+- [Hima01Application.java](mdc:src/main/java/com/marcopolo/hima01/Hima01Application.java) - Spring Boot应用程序入口
+
+### 控制器
+- [ChatController.java](mdc:src/main/java/com/marcopolo/hima01/controller/ChatController.java) - 处理聊天请求
+- [ChatHistoryController.java](mdc:src/main/java/com/marcopolo/hima01/controller/ChatHistoryController.java) - 处理聊天历史记录
+
+### 仓库
+- [ChatHistoryRepository.java](mdc:src/main/java/com/marcopolo/hima01/repository/ChatHistoryRepository.java) - 聊天历史记录接口
+- [InMemoryChatHistoryRepository.java](mdc:src/main/java/com/marcopolo/hima01/repository/InMemoryChatHistoryRepository.java) - 内存实现
+
+### 配置
+- [CommonConfiguration.java](mdc:src/main/java/com/marcopolo/hima01/config/CommonConfiguration.java) - AI聊天配置
+- [MvcConfiguration.java](mdc:src/main/java/com/marcopolo/hima01/config/MvcConfiguration.java) - MVC跨域配置
+
+### 实体类
+- [MessageVO.java](mdc:src/main/java/com/marcopolo/hima01/entity/vo/MessageVO.java) - 消息数据传输对象
+
+### 配置文件
+- [application.yml](mdc:src/main/resources/application.yml) - 应用程序配置
+
+## 功能流程
+1. 用户发送聊天请求到`/ai/chat`端点
+2. 系统记录聊天会话ID
+3. 请求传递给OpenAI模型处理
+4. 使用Stream方式返回AI回复
+5. 可通过`/ai/history/{type}/{chatId}`查询历史对话
+
+## 技术栈
+- Spring Boot 3.4.5
+- Spring AI (OpenAI集成)
+- 内存存储(无数据库)
+- Reactor流式响应
+
