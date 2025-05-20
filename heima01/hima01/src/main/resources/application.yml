@@ -1,4 +1,9 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 104857600
+      max-request-size: 104857600
+
   application:
     name: HiMa01
   ai:
@@ -8,11 +13,40 @@ spring:
         base-url: https://vip.apiyi.com
         options:
           model: gpt-4o-mini
+      embedding:
+        options:
+          model: text-embedding-ada-002
+        base-url: https://vip.apiyi.com
     grok:
       api-key: ${GROK_API_KEY}
       base-url: https://api.x.ai
       options:
         model: grok-3-mini-beta
+    vertex:
+      ai:
+        gemini:
+          api-key: ${GEMINI_API_KEY}
+          project-id: ${GEMINI_PROJECT_ID:your-project-id}
+          location: us-central1
+          chat:
+            options:
+              model: models/gemini-1.5-pro
+              temperature: 0.2
+              max-tokens: 2048
+    gemini:
+      api-key: ${GEMINI_API_KEY}
+
+    vectorstore:
+      milvus:
+        client:
+          host: 192.168.3.79
+          port: 19530
+        databaseName: "default"
+        collectionName: "vector_store"
+        embeddingDimension: 1536
+        indexType: IVF_FLAT
+        metricType: COSINE
+        initialize-schema: true
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
