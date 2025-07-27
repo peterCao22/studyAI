@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: a8-contract-post
+  
+  # 数据源配置
+  datasource:
+    # OA系统数据源
+    oa:
+      jdbc-url: jdbc:sqlserver://localhost:1433;databaseName=oa_database
+      username: oa_user
+      password: oa_password
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    
+    # 本地数据源（用于缓存和日志）
+    local:
+      jdbc-url: jdbc:h2:file:./data/local
+      username: sa
+      password: 
+      driver-class-name: org.h2.Driver
+  
+  # H2数据库控制台配置
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# 合同接口配置
+contract:
+  api:
+    base-url: https://portal.gdwm.cn:19000/api
+    username: seeyon
+    password: Syd2N72nGTu59/L281HjORP6bmDFksPly/xzyGoy5fAr+ewHjgClHGIrpT5Wkan7reHC3DOt5hf4pzw1NHcoe7t7QnBobO2vamJegg0VMeaQYz8J4aKEJEUCV4MhNgpMzxm8YMSM5X5T1341hIGPwWr3OQWdpRi1JcnMdXUi5YY=
+    lang-code: zh
+    # Token缓存时间（毫秒）
+    token-ttl: 86400000
+  
+  # 数据同步配置
+  sync:
+    # 定时任务配置（Cron表达式）
+    cron: 0 0 1 * * ?  # 每天凌晨1点执行
+    # 批量处理大小
+    batch-size: 50
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.seeyon.A8ContractPost: DEBUG
+  file:
+    name: logs/a8-contract-post.log 
